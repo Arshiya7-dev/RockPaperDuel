@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+@theme {
+  --font-vazir: 'Vazirmatn', sans-serif;
+  --font-lalezar: 'Lalezar', sans-serif;
+
+  --color-ink: #f6f3ff;
+  --color-bg: #0a0912;
+  --color-panel: #1b1830;
+  --color-panel-2: #1f1a3a;
+  --color-panel-3: #181430;
+  --color-player: #8b5cf6;
+  --color-player-soft: #b9a6ff;
+  --color-cpu: #fb5a72;
+  --color-cpu-soft: #ffb0bf;
+  --color-gold: #ffc84d;
+  --color-muted: #8d84ab;
+  --animate-pop: pop 0.35s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.85);
+  }
+
+  60% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ================= BASE ================= */
+@layer base {
+  * {
+    @apply box-border m-0 p-0;
+  }
+
+  html,
+  body {
+    @apply h-full overflow-x-hidden font-vazir text-ink bg-bg bg-[radial-gradient(circle_at_18%_8%, rgb(139_92_246_/_0.16), transparent_42%), radial-gradient(circle_at_85%_92%, rgb(251_90_114_/_0.14), transparent_42%)];
+  }
+}
+
+/* ================= GRID BACKGROUND ================= */
+@layer components {
+  body::before {
+    content: "";
+    @apply fixed inset-0 pointer-events-none z-0 bg-[linear-gradient(rgb(255_255_255_/_0.035)_1px, transparent_1px), linear-gradient(90deg, rgb(255_255_255_/_0.035)_1px, transparent_1px)] bg-[length:42px_42px];
+  }
+}
+
+/* ================= PAGE LAYOUT ================= */
+@layer components {
+  .stage {
+    @apply relative z-10 min-h-screen flex flex-col items-center pt-8 px-4 pb-14;
+  }
+
+  .title-wrap {
+    @apply text-center mb-7;
+  }
+
+  .eyebrow {
+    @apply text-xs uppercase text-gray-400 tracking-[0.35em] mb-1.5;
+  }
+}
+
+/* ================= TITLE ================= */
+@layer components {
+  h1 {
+    @apply font-lalezar leading-[1.15] text-[clamp(40px, 8vw, 68px)] bg-clip-text text-transparent bg-[linear-gradient(90deg, var(--color-player-soft), var(--color-gold)_50%, var(--color-cpu-soft))];
+  }
+}
+
+/* ================= SCOREBOARD ================= */
+@layer components {
+  .scoreboard {
+    @apply grid grid-cols-3 items-center gap-3 w-full max-w-[720px] mb-[26px];
+  }
+
+  .score-panel {
+    @apply flex items-center gap-3 rounded-2xl border border-white/10 relative overflow-hidden bg-panel py-3.5 px-[18px];
+  }
+
+  .score-panel.player {
+    @apply justify-start;
+  }
+
+  .score-panel.computer {
+    @apply justify-end flex-row-reverse;
+  }
+
+  .score-label {
+    @apply text-[11px] uppercase text-gray-400 relative z-10 tracking-[0.18em];
+  }
+
+  .score-num {
+    @apply font-lalezar text-4xl leading-none relative z-10 max-[480px]:text-[28px];
+  }
+
+  .score-panel.player .score-num {
+    @apply text-player-soft;
+  }
+
+  .score-panel.computer .score-num {
+    @apply text-cpu-soft;
+  }
+
+  .vs {
+    @apply font-lalezar justify-self-center w-[54px] h-[54px] flex items-center justify-center rounded-full text-xl bg-panel-2 text-gold border border-white/10 shadow-[0_0_0_5px_rgba(255, 200, 77, 0.18)];
+  }
+}
+
+/* ================= ARENA / DUEL ================= */
+@layer components {
+  .arena {
+    @apply relative flex flex-col items-center gap-7 rounded-[28px] border border-white/10 w-full max-w-[720px] bg-panel overflow-hidden p-[38px_20px_30px];
+  }
+
+  .duel {
+    @apply grid grid-cols-3 items-center w-full gap-3;
+  }
+
+  .fighter {
+    @apply flex flex-col items-center gap-2;
+  }
+
+  .fighter-tag {
+    @apply text-[11px] uppercase text-gray-400 tracking-[0.2em];
+  }
+
+  .clash {
+    @apply font-lalezar text-2xl justify-self-center text-gold opacity-[0.85];
+  }
+}
+
+/* ================= AVATAR ================= */
+@layer components {
+  .avatar {
+    @apply w-[124px] h-[124px] rounded-full flex items-center justify-center text-[56px] transition bg-[radial-gradient(circle_at_35%_30%, var(--color-panel-2), var(--color-panel-3))] border-2 border-white/10 max-[480px]:w-[92px] max-[480px]:h-[92px] max-[480px]:text-[42px];
+  }
+
+  .avatar.pulse-player {
+    @apply border-player animate-pop shadow-[0_0_0_10px_rgba(139, 92, 246, 0.12), 0_0_30px_rgba(139, 92, 246, 0.35)];
+  }
+
+  .avatar.pulse-cpu {
+    @apply border-cpu animate-pop shadow-[0_0_0_10px_rgba(251, 90, 114, 0.12), 0_0_30px_rgba(251, 90, 114, 0.35)];
+  }
+}
+
+/* ================= RESULT ================= */
+@layer components {
+  #result {
+    @apply text-gray-400 text-sm min-h-[20px] text-center transition;
+  }
+
+  #result.win {
+    @apply text-gold font-semibold;
+  }
+
+  #result.lose {
+    @apply text-cpu-soft font-semibold;
+  }
+
+  #result.tie {
+    @apply text-player-soft font-semibold;
+  }
+}
+
+/* ================= CHOICES / BUTTONS ================= */
+@layer components {
+  .choices {
+    @apply flex gap-4 justify-center flex-wrap w-full;
+  }
+
+  .btn {
+    @apply w-[92px] h-[92px] rounded-full border border-white/10 text-[36px] flex items-center justify-center transition cursor-pointer bg-[linear-gradient(160deg, var(--color-panel-2), var(--color-panel-3))] max-[480px]:w-[72px] max-[480px]:h-[72px] max-[480px]:text-[28px];
+  }
+
+  .btn:hover {
+    @apply -translate-y-[5px] border-player shadow-[0_12px_28px_rgba(139, 92, 246, 0.3)];
+  }
+
+  .btn:active {
+    @apply scale-95;
+  }
+
+  .btn:focus-visible {
+    @apply outline outline-2 outline-gold outline-offset-[3px];
+  }
+}
+
+/* ================= RESET ================= */
+@layer components {
+  .reset-btn {
+    @apply mt-4 px-6 py-2 rounded-full text-sm border border-white/10 text-muted transition cursor-pointer;
+  }
+
+  .reset-btn:hover {
+    @apply text-gold border-gold shadow-[0_0_0_6px_rgba(255, 200, 77, 0.18)];
+  }
+}
+
+@layer components {
+  .overlay-card {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-[6px] cursor-pointer scale-0 opacity-0 pointer-events-none transition duration-300;
+  }
+
+  .overlay-card:not(.scale-0) {
+    @apply scale-100 opacity-100 pointer-events-auto;
+  }
+
+  .card-inner {
+    @apply bg-panel-3 border border-white/10 rounded-[26px] text-center p-[48px_54px] max-w-[320px];
+  }
+
+  .card-title {
+    @apply font-lalezar text-[44px];
+  }
+
+  .card-emoji {
+    @apply text-[54px] mb-4;
+  }
+
+  .card-sub {
+    @apply text-gray-400 text-sm;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* npx @tailwindcss/cli -i ./asset/stylesheet/main.css -o ./asset/stylesheet/output.css --watch */

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors — Arena</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="asset/stylesheet/output.css">
+</head>
+
+<body>
+
+  <div class="stage">
+
+    <div class="title-wrap">
+      <div class="eyebrow">First to win 3 rounds wins the game</div>
+      <h1>Rock · Paper · Scissors</h1>
+    </div>
+
+    <div class="scoreboard">
+      <div class="score-panel player">
+        <span class="score-label">You</span>
+        <span class="score-num userscore">0</span>
+      </div>
+
+      <!-- FIXED VS -->
+      <div class="vs">VS</div>
+
+      <div class="score-panel computer">
+        <span class="score-label">AI</span>
+        <span class="score-num computerscore">0</span>
+      </div>
+    </div>
+
+    <div class="arena">
+
+      <div class="duel">
+        <div class="fighter player">
+          <span class="fighter-tag">You</span>
+          <div class="avatar user-choice">❔</div>
+        </div>
+
+        <div class="clash">⚡</div>
+
+        <div class="fighter computer">
+          <span class="fighter-tag">AI</span>
+          <div class="avatar computer-choice">❔</div>
+        </div>
+      </div>
+
+      <p id="result">Waiting for your move...</p>
+
+      <div class="choices">
+        <button class="btn" id="rock">✊</button>
+        <button class="btn" id="paper">🤚</button>
+        <button class="btn" id="scissors">✌️</button>
+      </div>
+
+      <button class="reset-btn">Restart Game</button>
+
+    </div>
+
+  </div>
+
+  <div class="overlay-card win-card scale-0">
+    <div class="card-inner">
+      <div class="card-emoji">🏆</div>
+      <div class="card-title">You Win!</div>
+      <div class="card-sub">Tap to play again</div>
+    </div>
+  </div>
+
+  <div class="overlay-card loose-card scale-0">
+    <div class="card-inner">
+      <div class="card-emoji">💀</div>
+      <div class="card-title">You Lose!</div>
+      <div class="card-sub">Tap to try again</div>
+    </div>
+  </div>
+
+  <script src="asset/javascript/script.js"></script>
+
+</body>
+
+</html>
